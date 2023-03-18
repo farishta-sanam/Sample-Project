@@ -1,0 +1,24 @@
+.centered{
+  text-align: center;
+}
+.table_caption{
+  margin-left: 200px;
+}
+.error{
+  color:red;
+}
+table{
+  margin: auto;
+  width: 800px;
+  table-layout: fixed;
+  border: 1px solid blue;
+  border-collapse: collapse;
+}
+th{
+  color: white;
+  background-color: blue;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+}

@@ -4,22 +4,21 @@ const Table = (props) => {
 
     function charCount(props) {
         const arr1 = [];
-        const val = props.tableValue;
-        const valCase = val.toLowerCase();
+        const val = props.tableValue.toLowerCase();
         const len = props.tableValue.length;
 
         let count = 0;
 
-        if (valCase !== " ") {
+        if (val !== " ") {
             for (let i = 0; i < len; i++) {
-                if (valCase[i] !== ' ') {
+                if (val[i] !== ' ') {
                     for (let j = 0; j < len; j++) {
-                        if (valCase[i] === valCase[j]) {
+                        if (val[i] === val[j]) {
                             count += 1;
                         }
                     }
-                    if (arr1.indexOf(valCase[i]) === -1) {
-                        arr1.push(valCase[i], count);
+                    if (arr1.indexOf(val[i]) === -1) {
+                        arr1.push(val[i], count);
                     }
                     count = 0;
                 }

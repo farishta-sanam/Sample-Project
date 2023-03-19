@@ -4,8 +4,8 @@ const Table = (props) => {
 
     function charCount(props) {
         const arr1 = [];
-        const val = props.text;
-        const len = props.text.length;
+        const val = props.tableRender;
+        const len = props.tableRender.length;
 
         let count = 0;
 

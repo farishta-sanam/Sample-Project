@@ -1,39 +1,52 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from './Table';
 
 const Header = () => {
-    const [text, setText] = useState('');
+    const [text, setText] = useState();
     const [errorMessage, setErrorMessage] = useState('');
     const [tableRender, setTableRender] = useState(false);
     
-    const handleChange = (e) => {
-        setText(e.target.value);
-        // if(text.length === 0 ) setErrorMessage("Please enter a word or sentence");
-        // else setErrorMessage("");
+    useEffect(() => {
+        if(text !== ""){
+            setErrorMessage("");
+        } else {
+            setErrorMessage("Please enter a word or sentence");
+        }
+    },[text])
+
+    const handleSubmit= (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const data = text;
+        if(!form.checkValidity()){
+            setErrorMessage("Please enter a word or sentence");
+            setTableRender(false);
+        } else {
+            setErrorMessage("");
+            setTableRender(data); 
+        }
     }
 
-    const handleClick= (e) => {
-        e.preventDefault();
-        // if()
-        // if(text.length !== 0 ) setTableRender(true); 
-        // else setTableRender(false);
-        // if(text.length === 0 ) setErrorMessage("Please enter a word or sentence");
-        // else setErrorMessage("");
+    const handleClear = () => {
+        setText('');
+        setTimeout(() => {
+            setErrorMessage('');
+        })
     }
 
     return(
         <div>
             <h2 className='centered'>Character Counter</h2>
-            <form className='centered' >
+            <form className='centered' id='form' onSubmit={handleSubmit} noValidate>
                 <label>
                     Enter a word or a sentence to find out number of occurance of a character<br/><br/>
                 </label>
-                <input type="text" value={text} onChange={(e) => handleChange(e)} required/> &nbsp;
-                <button onClick={(e) => handleClick(e)}>Get Count</button>
-                {errorMessage && <p className="error centered"> {errorMessage} </p>}
+                <input type="text" value={text || ''} onChange={(e) => setText(e.target.value)} required/> &nbsp;
+                <button>Get Count</button> &nbsp;
+                <button onClick={handleClear}>Clear</button>
+                {errorMessage && <p className='error centered'> {errorMessage} </p>}
             </form>
-            {tableRender && (<Table text={text}/>) }
+            {tableRender ? <Table tableRender={tableRender}/> : '' }
         </div>
     );
 } 

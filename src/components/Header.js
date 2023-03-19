@@ -4,7 +4,7 @@ import Table from './Table';
 const Header = () => {
     const [text, setText] = useState();
     const [errorMessage, setErrorMessage] = useState('');
-    const [tableRender, setTableRender] = useState(false);
+    const [tableValue, setTableValue] = useState(false);
     
     useEffect(() => {
         if(text !== ""){
@@ -20,10 +20,10 @@ const Header = () => {
         const data = text;
         if(!form.checkValidity()){
             setErrorMessage("Please enter a word or sentence");
-            setTableRender(false);
+            setTableValue(false);
         } else {
             setErrorMessage("");
-            setTableRender(data); 
+            setTableValue(data); 
         }
     }
 
@@ -46,7 +46,7 @@ const Header = () => {
                 <button onClick={handleClear}>Clear</button>
                 {errorMessage && <p className='error centered'> {errorMessage} </p>}
             </form>
-            {tableRender ? <Table tableRender={tableRender}/> : '' }
+            {tableValue ? <Table tableValue={tableValue}/> : '' }
         </div>
     );
 } 
